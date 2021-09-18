@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.ViewModels;
 using CleanArchitecture.Domain;
+using CleanArchitecture.Domain.Interfaces;
 
 namespace CleanArchitecture.Application.Services
 {

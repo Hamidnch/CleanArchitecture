@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CleanArchitecture.Domain;
+using CleanArchitecture.Domain.Interfaces;
 using CleanArchitecture.Domain.Models;
 using CleanArchitecture.Infra.Data.Context;
 
@@ -16,11 +17,17 @@ namespace CleanArchitecture.Infra.Data.Repository
         public CourseRepository(UniversityDbContext universityDbContext)
         {
             _universityDbContext = universityDbContext;
+            _universityDbContext.SaveChanges();
         }
 
         public IEnumerable<Course> GetCourses()
         {
             return _universityDbContext.Courses;
+        }
+
+        public void Add(Course course)
+        {
+            _universityDbContext.Courses.Add(course);
         }
     }
 }
