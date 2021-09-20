@@ -1,19 +1,15 @@
+using CleanArchitecture.Infra.Data.Context;
+using CleanArchitecture.IoC;
+using CleanArchitecture.Mvc.Configurations;
 using CleanArchitecture.Mvc.Data;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CleanArchitecture.Infra.Data.Context;
-using CleanArchitecture.IoC;
 
 namespace CleanArchitecture.Mvc
 {
@@ -33,16 +29,19 @@ namespace CleanArchitecture.Mvc
                 options.UseSqlServer(
                     Configuration.GetConnectionString("IdentityConnection")));
 
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddDbContext<UniversityDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("UniversityDbConnection"));
             });
-            services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddControllersWithViews();
 
+            services.AddMediatR(typeof(Startup));
+            services.RegisterAutoMapper();
             RegisterAllServices(services);
         }
 

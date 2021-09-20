@@ -11,6 +11,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CleanArchitecture.Api.Configurations;
+using CleanArchitecture.Infra.Data.Context;
+using CleanArchitecture.IoC;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitecture.Api
 {
@@ -27,11 +32,20 @@ namespace CleanArchitecture.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddDbContext<UniversityDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("UniversityDbConnection"));
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CleanArchitecture.Api", Version = "v1" });
             });
+
+            services.AddMediatR(typeof(Startup));
+            services.RegisterAutoMapper();
+            RegisterAllServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +68,11 @@ namespace CleanArchitecture.Api
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static void RegisterAllServices(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
     }
 }
