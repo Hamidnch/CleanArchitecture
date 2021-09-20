@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using CleanArchitecture.Domain.Commands;
+﻿using CleanArchitecture.Domain.Commands;
 using CleanArchitecture.Domain.Interfaces;
 using CleanArchitecture.Domain.Models;
 using MediatR;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CleanArchitecture.Domain.CommandHandlers
 {
-    public class CourseCommandHandler: IRequestHandler<CreateCourseCommand, bool>
+    public class CourseCommandHandler : IRequestHandler<CreateCourseCommand, bool>
     {
         private readonly ICourseRepository _courseRepository;
 

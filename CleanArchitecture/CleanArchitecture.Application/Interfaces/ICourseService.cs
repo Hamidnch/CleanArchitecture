@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CleanArchitecture.Application.ViewModels;
-using CleanArchitecture.Domain.Models;
+﻿using CleanArchitecture.Application.ViewModels;
 
 namespace CleanArchitecture.Application.Interfaces
 {

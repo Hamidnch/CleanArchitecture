@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CleanArchitecture.Domain.Core.Bus;
+﻿using CleanArchitecture.Domain.Core.Bus;
 using CleanArchitecture.Domain.Core.Commands;
 using MediatR;
+using System.Threading.Tasks;
 
 namespace CleanArchitecture.Infra.Bus
 {
-    public class InMemoryBus: IMediatorHandler
+    public class InMemoryBus : IMediatorHandler
     {
         private readonly IMediator _mediator;
 
@@ -18,7 +14,7 @@ namespace CleanArchitecture.Infra.Bus
             _mediator = mediator;
         }
 
-        public Task SendCommand<T>(T command) where T: Command
+        public Task SendCommand<T>(T command) where T : Command
         {
             return _mediator.Send(command);
         }

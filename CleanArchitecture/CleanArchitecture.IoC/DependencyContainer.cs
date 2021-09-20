@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CleanArchitecture.Application.Interfaces;
+﻿using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Application.Services;
-using CleanArchitecture.Domain;
 using CleanArchitecture.Domain.CommandHandlers;
 using CleanArchitecture.Domain.Commands;
 using CleanArchitecture.Domain.Core.Bus;
@@ -25,7 +19,7 @@ namespace CleanArchitecture.IoC
             //Domain InMemoryBus Mediator
             services.AddScoped<IMediatorHandler, InMemoryBus>();
 
-            //domain handlers
+            //Domain handlers
             services.AddScoped<IRequestHandler<CreateCourseCommand, bool>, CourseCommandHandler>();
             //Application layer
             services.AddScoped<ICourseService, CourseService>();
